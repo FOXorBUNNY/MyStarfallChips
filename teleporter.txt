@@ -1,0 +1,48 @@
+--@name Teleporter chip
+--@author {kat} -not good at anything-
+--@server
+
+-- only works if your admin <--(for servers) or singleplayer 
+-- Press r to teleport
+ 
+ OWO = sounds.create( owner(),"ambient/energy/weld1.wav")
+
+hook.add( "Keypress", "keypress_teleport", function( ply, key )
+     if ( key == IN_KEY.RELOAD) then
+    owner():setPos(owner():getEyeTrace().HitPos)
+    
+    
+    local eff = effect.create()
+    eff:setEntity(owner())
+    eff:setStart(owner():getPos())
+    eff:setOrigin(owner():localToWorld(Vector(0, 0, 5)))
+    eff:play("ManhackSparks")
+    
+    
+    local eff1 = effect.create()
+    eff1:setEntity(owner())
+    eff1:setStart(owner():getPos())
+    eff1:setOrigin(owner():localToWorld(Vector(0, 0, 5)))
+    eff1:play("cball_explode")
+    
+    
+    local eff2 = effect.create()
+    eff2:setEntity(owner())
+    eff2:setStart(owner():getPos())
+    eff2:setOrigin(owner():localToWorld(Vector(0, 0, 2)))
+    eff2:play("entity_remove")
+    
+    
+    local eff3 = effect.create()
+    eff3:setEntity(owner())
+    eff3:setStart(owner():getPos())
+    eff3:setOrigin(owner():localToWorld(Vector(0, 0, 0)))
+    eff3:play("VortDispel")
+    
+    
+    OWO:play()
+    timer.simple(0.9, function() OWO:stop() end)  
+    
+  end 
+end)
+
